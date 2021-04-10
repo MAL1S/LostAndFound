@@ -25,6 +25,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
+    /////////
+    private Button next;
+    ////////
     private Button logBtn;
     private FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
@@ -34,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /////////
+        next = findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FoundActivity.class));
+            }
+        });
+        ////////
+
         logBtn = findViewById(R.id.button2);
 
         logBtn.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this,"Signed",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(MainActivity.this, FoundActivity.class));
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

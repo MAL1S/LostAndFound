@@ -5,5 +5,9 @@
     <string name="lost">Потерянное</string>
     <string name="account">Профиль</string>
     <string name="add">Добавить</string>
+    <string-array name="themes">
+        <item>Нашел</item>
+        <item>Потерял</item>
+    </string-array>
 
 </resources>
