@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,20 +14,37 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FoundActivity extends AppCompatActivity {
 
     private RecyclerView cardsList;
     private CardsAdapter cardsAdapter;
+    TextView result; // получаем из firebase
+    DatabaseReference dbRef; // firebase object
+    HashMap<String, Record> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found);
+
+        result = findViewById(R.id.textView);
 
         cardsList = findViewById(R.id.rv_stocks_cards);
 
@@ -37,6 +55,7 @@ public class FoundActivity extends AppCompatActivity {
 
         cardsAdapter = new CardsAdapter(15 , this);
         cardsList.setAdapter(cardsAdapter);
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 
@@ -70,6 +89,22 @@ public class FoundActivity extends AppCompatActivity {
             }
         });
 
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef.child("0").child("record").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GenericTypeIndicator<HashMap<String,Record>> r = new GenericTypeIndicator<HashMap<String,Record>>() {};
+                list = snapshot.getValue(r);
+                for (Map.Entry<String, Record> entry : list.entrySet())
+                    System.out.println(entry.getKey() + " " + entry.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }); // следим за изменением данных
 
 
     }
