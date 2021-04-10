@@ -12,18 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LostAndFound">
         <activity android:name=".AccountActivity"/>
-        <activity android:name=".FoundActivity"/>
-
-        <activity android:name=".AddActivity" />
-        <activity android:name=".LostActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FoundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".AddActivity" />
+        <activity android:name=".LostActivity" />
+
+
+
+
 
     </application>
 
