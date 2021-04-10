@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -20,16 +17,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FoundActivity extends AppCompatActivity{
 
     TextView result; // получаем из firebase
     DatabaseReference dbRef; // firebase object
-    ArrayList<String> list;
+    HashMap<String, Record> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,18 +67,13 @@ public class FoundActivity extends AppCompatActivity{
         });
 
         dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.child("record").addValueEventListener(new ValueEventListener() {
+        dbRef.child("0").child("record").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                GenericTypeIndicator<Record> r = new GenericTypeIndicator<Record>() {};
-                if (r != null) {
-                    Record rec =  snapshot.child("record").getValue(r);
-                    Toast.makeText(FoundActivity.this, "Ку вы молодец часть 1", Toast.LENGTH_SHORT).show();
-                    if (rec != null) {
-                        result.setText(rec.toString());
-                        Toast.makeText(FoundActivity.this, "Ку вы молодец", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                GenericTypeIndicator<HashMap<String,Record>> r = new GenericTypeIndicator<HashMap<String,Record>>() {};
+                list = snapshot.getValue(r);
+                for (Map.Entry<String, Record> entry : list.entrySet())
+                    System.out.println(entry.getKey() + " " + entry.getValue());
             }
 
             @Override
