@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">LostAndFound</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_maps2">Map</string>
+
+    <string name="found">Найденное</string>
+    <string name="lost">Потерянное</string>
+    <string name="account">Профиль</string>
+    <string name="add">Добавить</string>
 </resources>
