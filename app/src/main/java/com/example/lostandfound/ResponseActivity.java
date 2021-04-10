@@ -50,10 +50,12 @@ public class ResponseActivity extends AppCompatActivity {
                 }
             }
         });
+        //возвращаемся на found
         responseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(ResponseActivity.this, FoundActivity.class);
+                startActivity(i);
             }
         });
     }
