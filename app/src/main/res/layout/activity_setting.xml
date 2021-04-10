@@ -20,4 +20,4 @@
         app:menu="@menu/menu_navigation"
         android:layout_centerInParent="true"/>
 
-</>
+</RelativeLayout>
