@@ -50,6 +50,7 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
 
     private Button button;
+    private Button but;
     private TextView tv;
 
     @Override
@@ -69,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, MapsActivity2.class);
                 startActivity(i);
+            }
+        });
+
+        but = findViewById(R.id.button5);
+        but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FoundActivity.class));
             }
         });
     }

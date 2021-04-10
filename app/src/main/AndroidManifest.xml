@@ -33,8 +33,9 @@
 
         <activity
             android:name=".MapsActivity2"
-            android:label="@string/title_activity_maps2"></activity>
-        <activity android:name=".SettingActivity" />
+            ></activity>
+        <activity android:name=".AccountActivity"/>
+        <activity android:name=".FoundActivity"/>
         <activity android:name=".AddActivity" />
         <activity android:name=".LostActivity" />
         <activity android:name=".ResponseActivity" >

@@ -39,6 +39,15 @@
         android:gravity="center_horizontal">
 
         <Button
+
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="в меню"
+
+            />
+
+        <Button
             android:layout_gravity="bottom"
             android:id="@+id/button2"
             android:layout_width="wrap_content"
