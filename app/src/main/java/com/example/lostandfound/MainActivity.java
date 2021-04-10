@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     final int RC_SIGN_IN=2;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {//TODO авторизация через Гугл
+    protected void onCreate(Bundle savedInstanceState) {//TODO Проаверка что уже авторизирован
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
