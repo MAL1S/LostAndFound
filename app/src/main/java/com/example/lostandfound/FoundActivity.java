@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,11 +20,23 @@ import java.util.Scanner;
 
 public class FoundActivity extends AppCompatActivity {
 
+    private RecyclerView cardsList;
+    private CardsAdapter cardsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found);
+
+        cardsList = findViewById(R.id.rv_stocks_cards);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        cardsList.setLayoutManager(layoutManager);
+
+        cardsList.setHasFixedSize(true);
+
+        cardsAdapter = new CardsAdapter(15 , this);
+        cardsList.setAdapter(cardsAdapter);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 
@@ -55,6 +69,7 @@ public class FoundActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
 
     }
