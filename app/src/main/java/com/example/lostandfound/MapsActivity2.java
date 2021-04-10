@@ -66,9 +66,10 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MapsActivity2.this, MainActivity.class);
-                i.putExtra("lat", String.valueOf(marker.getPosition().latitude));
-                i.putExtra("lon", String.valueOf(marker.getPosition().longitude));
+                Intent i = new Intent(MapsActivity2.this, AddActivity.class);
+                i.putExtra("check", "true");
+                i.putExtra("lat", marker.getPosition().latitude);
+                i.putExtra("lon", marker.getPosition().longitude);
                 startActivity(i);
             }
         });
@@ -79,9 +80,9 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     protected void onResume() {
         super.onResume();
         if (granted || checkPermission()) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000 * 10, 20, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000 * 10, 20, locationListener);
             if (locationManager != null){
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 if (marker != null)
                     showLocation(marker.getPosition());
             }

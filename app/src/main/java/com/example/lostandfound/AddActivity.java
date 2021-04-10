@@ -30,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AddActivity extends AppCompatActivity implements ValueEventListener{
     Button createButton;
+    Button pickCoordinatesButton;// Кнопка для выбора местоположения
+    double lat, lon; // Получаем координаты маркера
+    Intent i; //ну просто интент
     ImageButton pictureButton;
     Spinner spinner;
     EditText text;
@@ -55,7 +59,13 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        i = getIntent();
+        lat = getIntent().getDoubleExtra("lat", 43.8);
+        lon = getIntent().getDoubleExtra("lon", 124.12);
+        if (lat != 43.8) Toast.makeText(this, "Это с тост с карты", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Это с тост с менюхи", Toast.LENGTH_SHORT).show();
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);
@@ -88,6 +98,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         });
 
         createButton = findViewById(R.id.createButton);
+        pickCoordinatesButton = findViewById(R.id.pickCoordinates);
         pictureButton = findViewById(R.id.createPictureButton);
         spinner = findViewById(R.id.spinnerTheme);
         text = findViewById(R.id.createText);
@@ -102,8 +113,8 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
                 String info = text.getText().toString();
                 addRecord(new Record(
                         info,
-                        124.12,
-                        43.8,
+                        lon,
+                        lat,
                         theme
                 ), id);
 //                Intent i = new Intent(AddActivity.this, FoundActivity.class);
@@ -124,6 +135,14 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        pickCoordinatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddActivity.this, MapsActivity2.class);
+                startActivity(i);
             }
         });
     }
@@ -166,6 +185,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
     }
 
     public void addRecord(Record r, int id) {
+        Toast.makeText(this, "Мы попали addRecord", Toast.LENGTH_SHORT).show();
         dbRef.child(String.valueOf(id)).child("record").setValue(r);
     }
 
