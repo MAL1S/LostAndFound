@@ -186,7 +186,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
 
     public void addRecord(Record r, int id) {
         Toast.makeText(this, "Мы попали addRecord", Toast.LENGTH_SHORT).show();
-        dbRef.child(String.valueOf(id)).child("record").setValue(r);
+        dbRef.child(String.valueOf(id)).child("record").push().setValue(r);
     }
 
 
