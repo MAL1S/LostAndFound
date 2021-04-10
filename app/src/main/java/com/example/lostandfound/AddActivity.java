@@ -193,7 +193,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         Record record = snapshot.getValue(Record.class);
-
+        //Log.d("our check", snapshot.getValue().getClass().toString());
         Log.d("record", "record: " + record);
     }
 
