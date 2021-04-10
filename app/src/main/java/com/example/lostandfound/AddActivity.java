@@ -65,7 +65,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         if (lat != 43.8) Toast.makeText(this, "Это с тост с карты", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Это с тост с менюхи", Toast.LENGTH_SHORT).show();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);
