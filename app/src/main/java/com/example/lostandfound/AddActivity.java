@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,38 +17,39 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
-        bottomNavigationView.setSelectedItemId(R.id.add);
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(3);
+        menuItem.setChecked(true);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.found:
-                        startActivity(new Intent(getApplicationContext(), FoundActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
+
 
                     case R.id.account:
-                        startActivity(new Intent(getApplicationContext(), AccountActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
+                        Intent intent = new Intent(AddActivity.this , AccountActivity.class);
+                        startActivity(intent);
+                        break;
 
 
                     case R.id.lost:
-                        startActivity(new Intent(getApplicationContext(), LostActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
-                    case R.id.add:
-
-
+                        Intent intent1 = new Intent(AddActivity.this , LostActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.found:
+                        Intent intent2 = new Intent(AddActivity.this ,FoundActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
+
+                return false;
             }
         });
+
+
 
 
 

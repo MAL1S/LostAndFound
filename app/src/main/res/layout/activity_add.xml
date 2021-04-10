@@ -5,9 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoundActivity">
+    tools:context=".AddActivity">
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add"
+        android:layout_centerInParent="true"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

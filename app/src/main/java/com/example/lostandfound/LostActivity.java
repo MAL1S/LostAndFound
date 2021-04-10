@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,35 +17,40 @@ public class LostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
-        bottomNavigationView.setSelectedItemId(R.id.lost);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(2);
+        menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+
+
                     case R.id.found:
-                        startActivity(new Intent(getApplicationContext() , FoundActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
+                        Intent intent = new Intent(LostActivity.this , FoundActivity.class);
+                        startActivity(intent);
+                        break;
+
 
                     case R.id.account:
-                        startActivity(new Intent(getApplicationContext() , AccountActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
-
-                    case R.id.lost:
-
-
+                        Intent intent1 = new Intent(LostActivity.this , AccountActivity.class);
+                        startActivity(intent1);
+                        break;
                     case R.id.add:
-                        startActivity(new Intent(getApplicationContext() , AddActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
-
+                        Intent intent2 = new Intent(LostActivity.this , AddActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
+
                 return false;
             }
         });
+
+
+
     }
 }

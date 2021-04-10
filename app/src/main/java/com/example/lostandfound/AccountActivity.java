@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,35 +18,40 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
-        bottomNavigationView.setSelectedItemId(R.id.account);
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.found:
-                        startActivity(new Intent(getApplicationContext(), FoundActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
 
-                    case R.id.account:
+
+                    case R.id.found:
+                        Intent intent = new Intent(AccountActivity.this , FoundActivity.class);
+                        startActivity(intent);
+                        break;
+
 
                     case R.id.lost:
-                        startActivity(new Intent(getApplicationContext(), LostActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
+                        Intent intent1 = new Intent(AccountActivity.this , LostActivity.class);
+                        startActivity(intent1);
+                        break;
                     case R.id.add:
-                        startActivity(new Intent(getApplicationContext(), AddActivity.class));
-                        finish();
-                        overridePendingTransition(0 , 0);
-                        return;
-
-
+                        Intent intent2 = new Intent(AccountActivity.this , AddActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
+
+                return false;
             }
         });
+
+
+
+
 
 
 
