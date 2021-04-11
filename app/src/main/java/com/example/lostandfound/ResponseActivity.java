@@ -64,9 +64,11 @@ public class ResponseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Response r = new Response(text.getText().toString(), "1") ;
-                dbRef.child("0").child("record").push().setValue(r);
+                dbRef.child("0").child("response").push().setValue(r);
                 System.out.println(r);
                 Toast.makeText(ResponseActivity.this, "123", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ResponseActivity.this , FoundActivity.class);
+                startActivity(intent);
             }
         });
     }

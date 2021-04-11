@@ -95,11 +95,7 @@ public class FoundActivity extends AppCompatActivity {
                 closest = new ArrayList<>();
                 for (Map.Entry<String, Record> entry : list.entrySet()) {
                     System.out.println(entry.getKey() + " " + entry.getValue());
-                    LatLng coor = new LatLng(entry.getValue().lat,entry.getValue().log);
-                    LatLng me = new LatLng(location.getLatitude(),location.getLongitude());
-                    if(Math.abs(coor.latitude - me.latitude)<=0.01 &&Math.abs(coor.longitude - me.longitude)<=0.01){
-                        closest.add(entry.getValue());//Добавляем ближайшие к пользователю
-                    }
+
                 }
 
 

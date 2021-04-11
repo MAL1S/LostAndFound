@@ -73,6 +73,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 i.putExtra("lat", marker.getPosition().latitude);
                 i.putExtra("lon", marker.getPosition().longitude);
                 i.putExtra("text", text);
+                startActivity(i);
             }
         });
 

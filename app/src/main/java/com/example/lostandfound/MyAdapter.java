@@ -42,6 +42,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
 
+//        if (position % 2 == 0) {
+//
+//            holder.card.setBackgroundResource(R.color.light_grey);
+//        }
+//
+//        else {
+//            holder.card.setBackgroundResource(R.color.white);
+//        }
 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,7 +99,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         void show(int position) {
             Intent intent = new Intent(context, AdViewActivity.class);
             Record record = records.get(position);
-            intent.putExtra("edit_note_id", record.log);
+            intent.putExtra("record", record.toString());
             context.startActivity(intent);
         }
 
