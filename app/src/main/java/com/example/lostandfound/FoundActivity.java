@@ -19,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FoundActivity extends AppCompatActivity {
@@ -29,6 +31,9 @@ public class FoundActivity extends AppCompatActivity {
     TextView result; // получаем из firebase
     DatabaseReference dbRef; // firebase object
     HashMap<String, Record> list;
+
+    ArrayList<Record> records ;
+
 
 
     @Override
@@ -42,13 +47,13 @@ public class FoundActivity extends AppCompatActivity {
 
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        cardsList.setLayoutManager(layoutManager);
-
-        cardsList.setHasFixedSize(true);
-
-        cardsAdapter = new CardsAdapter(30 , this , "Собака" , "Найдена собака");
-        cardsList.setAdapter(cardsAdapter);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        cardsList.setLayoutManager(layoutManager);
+//
+//        cardsList.setHasFixedSize(true);
+//
+//        cardsAdapter = new CardsAdapter(30 , this , "Собака" , "Найдена собака");
+//        cardsList.setAdapter(cardsAdapter);
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
@@ -93,6 +98,15 @@ public class FoundActivity extends AppCompatActivity {
                 for (Map.Entry<String, Record> entry : list.entrySet()) {
                     System.out.println(entry.getKey() + " " + entry.getValue());
                 }
+
+                records = new ArrayList<>(list.values());
+
+                MyAdapter myAdapter = new MyAdapter(FoundActivity.this , records);
+
+
+                cardsList.setAdapter(myAdapter);
+                cardsList.setLayoutManager(new LinearLayoutManager(FoundActivity.this));
+
             }
 
             @Override
