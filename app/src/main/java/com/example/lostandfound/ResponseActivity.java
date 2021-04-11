@@ -10,13 +10,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -26,6 +31,8 @@ public class ResponseActivity extends AppCompatActivity {
     ImageButton pictureButton;
     public static final int PICK_IMAGE = 1;
     Bitmap picture;
+    DatabaseReference dbRef;
+    EditText text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,8 @@ public class ResponseActivity extends AppCompatActivity {
 
         pictureButton = findViewById(R.id.pictureButton);
         responseButton = findViewById(R.id.responseButton);
+        text = findViewById(R.id.responseText);
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
         pictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +63,10 @@ public class ResponseActivity extends AppCompatActivity {
         responseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ResponseActivity.this, FoundActivity.class);
-                startActivity(i);
+                Response r = new Response(text.getText().toString(), "1") ;
+                dbRef.child("0").child("record").push().setValue(r);
+                System.out.println(r);
+                Toast.makeText(ResponseActivity.this, "123", Toast.LENGTH_SHORT).show();
             }
         });
     }
