@@ -66,11 +66,13 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = getIntent();
+                String text = intent.getStringExtra("text");
                 Intent i = new Intent(MapsActivity2.this, AddActivity.class);
                 i.putExtra("check", "true");
                 i.putExtra("lat", marker.getPosition().latitude);
                 i.putExtra("lon", marker.getPosition().longitude);
-                startActivity(i);
+                i.putExtra("text", text);
             }
         });
 
