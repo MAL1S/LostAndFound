@@ -17,18 +17,22 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardViewHold
     private static int viewHolderCount;
     private int cardItems;
 
+   private String name ,  description;
+
     private Context parent;
 
 
-    public CardsAdapter(int numberOfItems , Context parent){
+    public CardsAdapter(int numberOfItems , Context parent ,  String name , String description){
         cardItems = numberOfItems;
         viewHolderCount = 0;
         this.parent = parent;
+        this.name = name;
+        this.description = description;
     }
 
     @NonNull
     @Override
-    public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType ) {
         Context context = parent.getContext();
         int layoutIfForListItem = R.layout.cards_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -37,8 +41,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardViewHold
 
         CardViewHolder viewHolder = new CardViewHolder(view);
 
-        viewHolder.listItemCardView.setText("Собака");
-        viewHolder.viewHolderIndex.setText("Найдена собака");
+        viewHolder.listItemCardView.setText(name);
+        viewHolder.viewHolderIndex.setText(description);
 
         viewHolderCount++;
 

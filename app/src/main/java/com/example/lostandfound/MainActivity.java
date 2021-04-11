@@ -29,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN=2;
+    private static String email;
+    private static String name;
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        MainActivity.name = name;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {//TODO Проаверка что уже авторизирован
         super.onCreate(savedInstanceState);
@@ -66,11 +77,18 @@ public class MainActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);//Ошибка
             firebaseAuthWithGoogle(account.getIdToken());
+           email = account.getEmail();
+            name = account.getDisplayName();
+
         } catch (ApiException e) {
             Log.w( "TAG", "signInResult:failed code=" + e.getStatusCode());
 
         }
     }
+
+
+
+
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -92,4 +110,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+

@@ -7,9 +7,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,12 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,16 +36,18 @@ public class FoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found);
 
-        result = findViewById(R.id.textView);
+        result = findViewById(R.id.found_count);
 
-        cardsList = findViewById(R.id.rv_stocks_cards);
+        cardsList = findViewById(R.id.rv_found_cards);
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         cardsList.setLayoutManager(layoutManager);
 
         cardsList.setHasFixedSize(true);
 
-        cardsAdapter = new CardsAdapter(15 , this);
+        cardsAdapter = new CardsAdapter(30 , this , "Собака" , "Найдена собака");
         cardsList.setAdapter(cardsAdapter);
 
 
@@ -96,8 +90,9 @@ public class FoundActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GenericTypeIndicator<HashMap<String,Record>> r = new GenericTypeIndicator<HashMap<String,Record>>() {};
                 list = snapshot.getValue(r);
-                for (Map.Entry<String, Record> entry : list.entrySet())
+                for (Map.Entry<String, Record> entry : list.entrySet()) {
                     System.out.println(entry.getKey() + " " + entry.getValue());
+                }
             }
 
             @Override

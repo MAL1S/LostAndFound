@@ -7,15 +7,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountActivity extends AppCompatActivity {
 
+    private TextView youName;
+    private TextView youEmail;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+        youName = (TextView)findViewById(R.id.you_name);
+        youEmail = (TextView)findViewById(R.id.you_email);
+
+        youName.setText( "Имя: " + MainActivity.getName());
+        youEmail.setText("Email: " + MainActivity.getEmail());
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 

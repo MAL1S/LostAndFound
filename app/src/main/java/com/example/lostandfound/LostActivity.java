@@ -2,6 +2,8 @@ package com.example.lostandfound;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +14,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class LostActivity extends AppCompatActivity {
 
+    private RecyclerView cardsList;
+    private CardsAdapter cardsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost);
 
+        cardsList = findViewById(R.id.rv_lost_cards);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        cardsList.setLayoutManager(layoutManager);
+
+        cardsList.setHasFixedSize(true);
+
+        cardsAdapter = new CardsAdapter(30 , this , "Ключи" , "Потеряны ключи от квартиры");
+        cardsList.setAdapter(cardsAdapter);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 

@@ -8,9 +8,26 @@
     tools:context=".LostActivity">
 
     <TextView
+
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="lost"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/lost_count"
+        android:text="@string/lost_count"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:layout_below="@id/lost_count"
+
+        android:id="@+id/rv_lost_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

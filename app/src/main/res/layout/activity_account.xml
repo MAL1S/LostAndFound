@@ -8,9 +8,52 @@
     tools:context=".AccountActivity">
 
     <TextView
+
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="akk"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/you_profile"
+        android:text="@string/your_profile"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/you_auth"
+        android:padding="10dp"
+        android:layout_below="@id/you_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Вы авторизовались под : "
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/you_email"
+        android:padding="10dp"
+        android:layout_below="@id/you_auth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/you_name"
+        android:padding="10dp"
+        android:layout_below="@id/you_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

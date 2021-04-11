@@ -5,6 +5,9 @@
     <string name="lost">Потерянное</string>
     <string name="account">Профиль</string>
     <string name="add">Добавить</string>
+    <string name="found_count">Всего найдено:</string>
+    <string name="lost_count">Всего потеряно:</string>
+    <string name="your_profile">Ваш профиль:</string>
     <string-array name="themes">
         <item>Нашел</item>
         <item>Потерял</item>
