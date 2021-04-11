@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Network;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class FoundActivity extends AppCompatActivity {
     HashMap<String, Record> list;
     private LocationManager locationManager;
     private Location location;
+
     ArrayList<Record> closest; //>лижайшие к пользователю объявления
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class FoundActivity extends AppCompatActivity {
         cardsAdapter = new CardsAdapter(30, this, "Собака", "Найдена собака");
         cardsList.setAdapter(cardsAdapter);
 
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
@@ -117,6 +120,8 @@ public class FoundActivity extends AppCompatActivity {
 
             }
         }); // следим за изменением данных
+
+
 
 
     }

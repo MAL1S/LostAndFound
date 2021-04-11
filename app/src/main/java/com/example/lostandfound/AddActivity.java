@@ -119,7 +119,8 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
                         info,
                         lon,
                         lat,
-                        theme
+                        theme,
+                        MainActivity.getEmail()
                 ), id);
 //                Intent i = new Intent(AddActivity.this, FoundActivity.class);
 //                startActivity(i);
