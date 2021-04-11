@@ -30,7 +30,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +49,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
     Spinner spinner;
     EditText text;
     public static final int PICK_IMAGE = 1;
+    public static final int PICK_COORDINATES = 2;
     Bitmap picture;
     DatabaseReference dbRef;
     static int id = 0;
@@ -59,9 +59,13 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        text = findViewById(R.id.createText);
+
         i = getIntent();
         lat = getIntent().getDoubleExtra("lat", 43.8);
         lon = getIntent().getDoubleExtra("lon", 124.12);
+        String info = getIntent().getStringExtra("text");
+        text.setText(info);
         if (lat != 43.8) Toast.makeText(this, "Это с тост с карты", Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, "Это с тост с менюхи", Toast.LENGTH_SHORT).show();
 
@@ -101,7 +105,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         pickCoordinatesButton = findViewById(R.id.pickCoordinates);
         pictureButton = findViewById(R.id.createPictureButton);
         spinner = findViewById(R.id.spinnerTheme);
-        text = findViewById(R.id.createText);
+
 
         dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.child("record").addValueEventListener(this); // следим за изменением данных
@@ -115,7 +119,8 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
                         info,
                         lon,
                         lat,
-                        theme
+                        theme,
+                        MainActivity.getEmail()
                 ), id);
 //                Intent i = new Intent(AddActivity.this, FoundActivity.class);
 //                startActivity(i);
@@ -142,6 +147,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AddActivity.this, MapsActivity2.class);
+                i.putExtra("text", text.getText().toString());
                 startActivity(i);
             }
         });

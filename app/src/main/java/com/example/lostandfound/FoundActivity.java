@@ -1,6 +1,8 @@
 package com.example.lostandfound;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FoundActivity extends AppCompatActivity {
@@ -32,9 +34,11 @@ public class FoundActivity extends AppCompatActivity {
     DatabaseReference dbRef; // firebase object
     HashMap<String, Record> list;
 
+    private LocationManager locationManager;
+    private Location location;
     ArrayList<Record> records ;
 
-
+    ArrayList<Record> closest; //>лижайшие к пользователю объявления
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +51,7 @@ public class FoundActivity extends AppCompatActivity {
 
 
 
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        cardsList.setLayoutManager(layoutManager);
-//
-//        cardsList.setHasFixedSize(true);
-//
-//        cardsAdapter = new CardsAdapter(30 , this , "Собака" , "Найдена собака");
-//        cardsList.setAdapter(cardsAdapter);
-
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
 
@@ -95,9 +92,17 @@ public class FoundActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GenericTypeIndicator<HashMap<String,Record>> r = new GenericTypeIndicator<HashMap<String,Record>>() {};
                 list = snapshot.getValue(r);
+                closest = new ArrayList<>();
                 for (Map.Entry<String, Record> entry : list.entrySet()) {
                     System.out.println(entry.getKey() + " " + entry.getValue());
+                    LatLng coor = new LatLng(entry.getValue().lat,entry.getValue().log);
+                    LatLng me = new LatLng(location.getLatitude(),location.getLongitude());
+                    if(Math.abs(coor.latitude - me.latitude)<=0.01 &&Math.abs(coor.longitude - me.longitude)<=0.01){
+                        closest.add(entry.getValue());//Добавляем ближайшие к пользователю
+                    }
                 }
+
+
 
                 records = new ArrayList<>(list.values());
 
