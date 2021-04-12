@@ -93,20 +93,22 @@ public class FoundActivity extends AppCompatActivity {
                 GenericTypeIndicator<HashMap<String,Record>> r = new GenericTypeIndicator<HashMap<String,Record>>() {};
                 list = snapshot.getValue(r);
                 closest = new ArrayList<>();
-                for (Map.Entry<String, Record> entry : list.entrySet()) {
-                    System.out.println(entry.getKey() + " " + entry.getValue());
+//                for (Map.Entry<String, Record> entry : list.entrySet()) {
+//                    System.out.println(entry.getKey() + " " + entry.getValue());
+//
+//                }
 
+                if(list != null) {
+
+
+                    records = new ArrayList<>(list.values());
+
+                    MyAdapter myAdapter = new MyAdapter(FoundActivity.this, records);
+
+
+                    cardsList.setAdapter(myAdapter);
+                    cardsList.setLayoutManager(new LinearLayoutManager(FoundActivity.this));
                 }
-
-
-
-                records = new ArrayList<>(list.values());
-
-                MyAdapter myAdapter = new MyAdapter(FoundActivity.this , records);
-
-
-                cardsList.setAdapter(myAdapter);
-                cardsList.setLayoutManager(new LinearLayoutManager(FoundActivity.this));
 
             }
 
