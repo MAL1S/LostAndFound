@@ -31,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -111,12 +113,7 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
             public void onClick(View v) {
                 String theme = spinner.getSelectedItem().toString();
                 String info = text.getText().toString();
-                addRecord(new Record(
-                        info,
-                        lon,
-                        lat,
-                        theme
-                ), id);
+                addRecord(theme, info, id);
 //                Intent i = new Intent(AddActivity.this, FoundActivity.class);
 //                startActivity(i);
             }
@@ -184,17 +181,18 @@ public class AddActivity extends AppCompatActivity implements ValueEventListener
         }
     }
 
-    public void addRecord(Record r, int id) {
+    public void addRecord(String theme, String info, int id) {
         Toast.makeText(this, "Мы попали addRecord", Toast.LENGTH_SHORT).show();
+        Record r = new Record(info, lon, lat, theme);
         dbRef.child(String.valueOf(id)).child("record").push().setValue(r);
     }
 
 
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
-        Record record = snapshot.getValue(Record.class);
+        //Record record = snapshot.getValue(Record.class);
         //Log.d("our check", snapshot.getValue().getClass().toString());
-        Log.d("record", "record: " + record);
+        //Log.d("record", "record: " + record);
     }
 
     @Override

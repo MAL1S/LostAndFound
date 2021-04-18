@@ -34,7 +34,13 @@
 
         <activity android:name=".MapsActivity2"></activity>
         <activity android:name=".AccountActivity"/>
-        <activity android:name=".FoundActivity"/>
+        <activity android:name=".FoundActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".AddActivity" />
         <activity android:name=".LostActivity" />
         <activity android:name=".ResponseActivity" >
@@ -43,11 +49,7 @@
         </activity>
         <activity android:name=".AdViewActivity"/>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
